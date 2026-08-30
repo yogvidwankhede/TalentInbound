@@ -12,14 +12,22 @@ import {
   GraduationCap,
   HeartHandshake,
   Lock,
+  Moon,
   Search,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
+  Sun,
   UserRound,
   X,
 } from 'lucide-react'
 import './styles.css'
+
+function getInitialTheme() {
+  const savedTheme = window.localStorage.getItem('talent-inbound-theme')
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
 
 const candidateProfile = {
   name: 'Radheya Joshi',
@@ -335,12 +343,20 @@ function useActiveStep() {
 function App() {
   const activeStep = useActiveStep()
   const [manualScreen, setManualScreen] = useState(null)
+  const [theme, setTheme] = useState(getInitialTheme)
   const step = storySteps[activeStep] || storySteps[0]
   const displayedStep = manualScreen ? { ...step, phoneScreen: manualScreen.screen, phoneMode: manualScreen.mode } : step
 
   useEffect(() => {
     setManualScreen(null)
   }, [activeStep])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    window.localStorage.setItem('talent-inbound-theme', theme)
+    const themeColor = document.querySelector('meta[name="theme-color"]')
+    themeColor?.setAttribute('content', theme === 'dark' ? '#11161a' : '#365f7d')
+  }, [theme])
 
   return (
     <main>
@@ -355,6 +371,15 @@ function App() {
           <a href="#story">How it works</a>
           <a className="navPrototypeButton" href="#prototype">Try prototype</a>
           <a href="#final">Get started</a>
+          <button
+            className="themeToggle"
+            type="button"
+            onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          >
+            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
         </div>
       </nav>
 

@@ -17,6 +17,19 @@
   --green-soft: #dfe8e2;
   --beige-soft: #ebe4d4;
   --grey-soft: #e4e5e2;
+  --grid-line: rgba(95, 100, 105, 0.12);
+  --topbar-bg: rgba(244, 240, 231, 0.8);
+  --topbar-line: rgba(216, 209, 193, 0.78);
+  --translucent-surface: rgba(255, 255, 255, 0.62);
+  --translucent-panel: rgba(255, 255, 255, 0.56);
+  --app-bg: #fbfaf6;
+  --app-header-bg: rgba(251, 250, 246, 0.93);
+  --app-nav-bg: rgba(255, 255, 255, 0.97);
+  --home-bg: #e7edf2;
+  --ghost-icon: rgba(255, 255, 255, 0.62);
+  --dock-bg: rgba(255, 255, 255, 0.55);
+  --dock-line: rgba(255, 255, 255, 0.72);
+  --contrast-text: #ffffff;
   --shadow-sm: 0 8px 24px rgba(32, 36, 42, 0.08);
   --shadow-md: 0 22px 60px rgba(32, 36, 42, 0.16);
   --radius-sm: 8px;
@@ -41,6 +54,42 @@
   color: var(--ink);
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #f1f4f6;
+  --ink-soft: #b8c0c7;
+  --muted: #8d979f;
+  --paper: #11161a;
+  --surface: #1b2227;
+  --surface-warm: #222b31;
+  --line: #39434a;
+  --accent: #70a5cc;
+  --accent-strong: #a9cee8;
+  --positive: #70a5cc;
+  --danger: #d4aaa1;
+  --candidate: #70a5cc;
+  --recruiter: #70a5cc;
+  --blue-soft: #233746;
+  --green-soft: #25363a;
+  --beige-soft: #302f2b;
+  --grey-soft: #293137;
+  --grid-line: rgba(174, 190, 201, 0.08);
+  --topbar-bg: rgba(17, 22, 26, 0.84);
+  --topbar-line: rgba(94, 108, 117, 0.5);
+  --translucent-surface: rgba(27, 34, 39, 0.78);
+  --translucent-panel: rgba(27, 34, 39, 0.72);
+  --app-bg: #141a1e;
+  --app-header-bg: rgba(20, 26, 30, 0.94);
+  --app-nav-bg: rgba(20, 26, 30, 0.98);
+  --home-bg: #17232c;
+  --ghost-icon: rgba(39, 49, 56, 0.9);
+  --dock-bg: rgba(39, 49, 56, 0.72);
+  --dock-line: rgba(107, 125, 137, 0.4);
+  --contrast-text: #11161a;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 22px 60px rgba(0, 0, 0, 0.34);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -53,8 +102,10 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    linear-gradient(90deg, rgba(95, 100, 105, 0.12) 1px, transparent 1px) 50% 0 / min(7vw, 96px) 100%,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 50% 0 / min(7vw, 96px) 100%,
     var(--paper);
+  color: var(--ink);
+  transition: background-color var(--duration-med) var(--ease-standard), color var(--duration-med) var(--ease-standard);
 }
 
 button,
@@ -82,8 +133,8 @@ a {
 .topbar {
   align-items: center;
   backdrop-filter: blur(16px);
-  background: rgba(244, 240, 231, 0.8);
-  border-bottom: 1px solid rgba(216, 209, 193, 0.78);
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--topbar-line);
   display: flex;
   justify-content: space-between;
   left: 0;
@@ -118,7 +169,7 @@ a {
 .brandMark {
   background: var(--ink);
   border-radius: 50%;
-  color: white;
+  color: var(--contrast-text);
   height: 2rem;
   justify-content: center;
   width: 2rem;
@@ -130,11 +181,31 @@ a {
   gap: var(--space-5);
 }
 
+.themeToggle {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 2.35rem;
+  justify-content: center;
+  padding: 0;
+  transition: transform var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard);
+  width: 2.35rem;
+}
+
+.themeToggle:active {
+  transform: scale(0.94);
+}
+
 .navPrototypeButton {
   align-items: center;
   background: var(--accent);
   border-radius: 999px;
-  color: white;
+  color: var(--contrast-text);
   display: inline-flex;
   font-weight: 760;
   min-height: 2.25rem;
@@ -241,7 +312,7 @@ h3 {
 
 .demoPath li {
   align-items: center;
-  background: rgba(255, 255, 255, 0.64);
+  background: var(--translucent-surface);
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--ink-soft);
@@ -280,12 +351,12 @@ h3 {
 
 .primary {
   background: var(--ink);
-  color: white;
+  color: var(--contrast-text);
 }
 
 .secondary,
 .muted {
-  background: rgba(255, 255, 255, 0.62);
+  background: var(--translucent-surface);
   border-color: var(--line);
   color: var(--ink);
 }
@@ -407,7 +478,7 @@ h3 {
 }
 
 .screen {
-  background: #fbfaf6;
+  background: var(--app-bg);
   border-radius: 2rem;
   height: 730px;
   overflow: hidden;
@@ -429,8 +500,8 @@ h3 {
 
 .appHeader {
   align-items: center;
-  background: rgba(251, 250, 246, 0.93);
-  border-bottom: 1px solid rgba(216, 209, 193, 0.74);
+  background: var(--app-header-bg);
+  border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   padding: var(--space-3) var(--space-4);
@@ -456,7 +527,7 @@ h3 {
 }
 
 .modePill {
-  background: color-mix(in srgb, var(--mode) 12%, white);
+  background: color-mix(in srgb, var(--mode) 18%, var(--surface));
   color: var(--mode);
   height: 2rem;
   width: 2rem;
@@ -513,6 +584,7 @@ h3 {
 
 .phoneButton.primary {
   background: var(--mode);
+  color: var(--contrast-text);
 }
 
 .phoneButton.compact {
@@ -673,7 +745,7 @@ h3 {
 }
 
 .iconButton.positive {
-  background: color-mix(in srgb, var(--positive) 12%, white);
+  background: color-mix(in srgb, var(--positive) 18%, var(--surface));
   color: var(--positive);
 }
 
@@ -747,8 +819,8 @@ h3 {
 }
 
 .pill {
-  background: color-mix(in srgb, var(--mode) 10%, white);
-  border: 1px solid color-mix(in srgb, var(--mode) 22%, white);
+  background: color-mix(in srgb, var(--mode) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--mode) 30%, var(--surface));
   border-radius: 999px;
   color: var(--mode);
   cursor: pointer;
@@ -811,7 +883,7 @@ h3 {
 }
 
 .discoverablePanel svg {
-  background: color-mix(in srgb, var(--positive) 12%, white);
+  background: color-mix(in srgb, var(--positive) 18%, var(--surface));
   border-radius: 50%;
   color: var(--positive);
   flex: 0 0 auto;
@@ -874,7 +946,7 @@ h3 {
 
 .loadingDot {
   animation: pulse var(--duration-slow) var(--ease-standard) infinite;
-  background: color-mix(in srgb, var(--mode) 11%, white);
+  background: color-mix(in srgb, var(--mode) 17%, var(--surface));
   border-radius: 999px;
   color: var(--mode);
   font-size: 0.72rem;
@@ -984,7 +1056,7 @@ meter::-webkit-meter-optimum-value {
 
 .matchBurst {
   align-items: center;
-  background: color-mix(in srgb, var(--mode) 9%, white);
+  background: color-mix(in srgb, var(--mode) 16%, var(--surface));
   border-radius: 50%;
   display: flex;
   height: 11rem;
@@ -1028,7 +1100,7 @@ meter::-webkit-meter-optimum-value {
 .processFlip.isFlipped div:first-child,
 .processFlip.isFlipped div:last-child {
   background: var(--ink);
-  color: white;
+  color: var(--contrast-text);
 }
 
 .scoreLegend {
@@ -1060,7 +1132,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .proofGrid > div {
-  background: rgba(255, 255, 255, 0.56);
+  background: var(--translucent-panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -1125,7 +1197,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .novaExplainer {
-  background: rgba(255, 255, 255, 0.58);
+  background: var(--translucent-panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   display: grid;
@@ -1193,7 +1265,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .prototypeViewport {
-  background: #fbfaf6;
+  background: var(--app-bg);
   border-radius: 2rem;
   height: 730px;
   overflow: hidden;
@@ -1205,7 +1277,7 @@ meter::-webkit-meter-optimum-value {
 .appLoading,
 .roleChoice,
 .prototypeLogin {
-  background: #fbfaf6;
+  background: var(--app-bg);
   height: 100%;
   overflow: auto;
   padding: var(--space-4);
@@ -1220,7 +1292,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .iosHome {
-  background: #e7edf2;
+  background: var(--home-bg);
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -1282,20 +1354,25 @@ meter::-webkit-meter-optimum-value {
   cursor: pointer;
 }
 
+.talentInboundIcon b {
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
 .talentInboundIcon span {
   background: var(--accent);
   box-shadow: 0 12px 24px rgba(54, 95, 125, 0.22);
-  color: white;
+  color: var(--contrast-text);
 }
 
 .ghostIcon span {
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(215, 208, 193, 0.82);
+  background: var(--ghost-icon);
+  border: 1px solid var(--line);
 }
 
 .iosDock {
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: var(--dock-bg);
+  border: 1px solid var(--dock-line);
   border-radius: 1.35rem;
   display: grid;
   gap: var(--space-3);
@@ -1322,7 +1399,7 @@ meter::-webkit-meter-optimum-value {
   background: var(--accent);
   border-radius: 1.55rem;
   box-shadow: 0 18px 34px rgba(54, 95, 125, 0.24);
-  color: white;
+  color: var(--contrast-text);
   display: flex;
   height: 5rem;
   justify-content: center;
@@ -1489,7 +1566,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .prototypeApp {
-  background: #fbfaf6;
+  background: var(--app-bg);
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   height: 100%;
@@ -1497,7 +1574,7 @@ meter::-webkit-meter-optimum-value {
 
 .prototypeAppHeader {
   align-items: center;
-  background: rgba(251, 250, 246, 0.96);
+  background: var(--app-header-bg);
   border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
@@ -1538,10 +1615,10 @@ meter::-webkit-meter-optimum-value {
 .headerIcon i {
   align-items: center;
   background: var(--accent);
-  border: 2px solid #fbfaf6;
+  border: 2px solid var(--app-bg);
   border-radius: 50%;
   bottom: -0.1rem;
-  color: white;
+  color: var(--contrast-text);
   display: flex;
   height: 1rem;
   justify-content: center;
@@ -1569,7 +1646,7 @@ meter::-webkit-meter-optimum-value {
 }
 
 .prototypeNav {
-  background: rgba(255, 255, 255, 0.97);
+  background: var(--app-nav-bg);
   border-top: 1px solid var(--line);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1603,7 +1680,7 @@ meter::-webkit-meter-optimum-value {
 
 .prototypeNav button i {
   background: var(--accent);
-  border: 2px solid white;
+  border: 2px solid var(--app-bg);
   border-radius: 50%;
   height: 0.55rem;
   position: absolute;
@@ -1914,7 +1991,7 @@ meter::-webkit-meter-optimum-value {
   align-items: center;
   background: var(--accent);
   border-radius: var(--radius-md);
-  color: white;
+  color: var(--contrast-text);
   display: flex;
   flex: 0 0 auto;
   font-size: 0.82rem;
@@ -2063,7 +2140,7 @@ meter::-webkit-meter-optimum-value {
 .selectableQuestion button.isSelected {
   background: var(--accent);
   border-color: var(--accent);
-  color: white;
+  color: var(--contrast-text);
 }
 
 .rankingRings {
@@ -2204,7 +2281,7 @@ meter::-webkit-meter-optimum-value {
 .inviteIcon {
   background: var(--accent);
   border-color: var(--accent);
-  color: white;
+  color: var(--contrast-text);
 }
 
 .inviteCandidateLine {
@@ -2270,7 +2347,7 @@ meter::-webkit-meter-optimum-value {
 
 .inviteStatus.matched {
   background: var(--blue-soft);
-  border-color: color-mix(in srgb, var(--accent) 36%, white);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--surface));
 }
 
 .intelligence h2,
